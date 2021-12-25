@@ -32,24 +32,24 @@ use self::chunk::ChunkColumnData;
 pub(crate) use self::{column_data::ColumnData, string_pool::StringPool};
 pub use self::{concat::ConcatColumnData, numeric::VectorColumnData};
 
-mod array;
+pub mod array;
 mod chunk;
-mod column_data;
+pub mod column_data;
 mod concat;
 mod date;
 pub(crate) mod datetime64;
-pub(crate) mod chrono_datetime;
+pub mod chrono_datetime;
 mod decimal;
 mod enums;
 mod factory;
-pub(crate) mod fixed_string;
+pub mod fixed_string;
 mod ip;
 pub(crate) mod iter;
-mod list;
+pub mod list;
 mod nullable;
-mod numeric;
-mod string;
-mod string_pool;
+pub mod numeric;
+pub mod string;
+pub mod string_pool;
 mod simple_agg_func;
 
 /// Represents Clickhouse Column
@@ -471,7 +471,7 @@ impl<K: ColumnType> Column<K> {
     }
 }
 
-pub(crate) fn new_column<K: ColumnType>(
+pub fn new_column<K: ColumnType>(
     name: &str,
     data: Arc<(dyn ColumnData + Sync + Send + 'static)>,
 ) -> Column<K> {

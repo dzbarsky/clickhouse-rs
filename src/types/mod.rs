@@ -30,7 +30,7 @@ pub(crate) use self::{
     unmarshal::Unmarshal,
 };
 
-pub(crate) mod column;
+pub mod column;
 mod marshal;
 mod stat_buffer;
 mod unmarshal;

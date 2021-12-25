@@ -11,9 +11,9 @@ use crate::{
     },
 };
 
-pub(crate) struct ArrayColumnData {
-    pub(crate) inner: ArcColumnData,
-    pub(crate) offsets: List<u64>,
+pub struct ArrayColumnData {
+    pub inner: ArcColumnData,
+    pub offsets: List<u64>,
 }
 
 impl ArrayColumnData {

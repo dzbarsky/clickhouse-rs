@@ -18,7 +18,7 @@ use super::{
     ColumnFrom,
 };
 
-pub(crate) struct StringColumnData {
+pub struct StringColumnData {
     pool: StringPool,
 }
 
@@ -27,10 +27,15 @@ pub(crate) struct StringAdapter<K: ColumnType> {
 }
 
 impl StringColumnData {
-    pub(crate) fn with_capacity(capacity: usize) -> Self {
+    pub fn with_capacity(capacity: usize) -> Self {
         Self {
             pool: StringPool::with_capacity(capacity),
         }
+    }
+
+    pub fn push_bytes(&mut self, bytes: &[u8]) {
+        let mut b = self.pool.allocate(bytes.len());
+        b.write_all(bytes).unwrap();
     }
 
     pub(crate) fn load<T: ReadEx>(reader: &mut T, size: usize) -> Result<Self> {

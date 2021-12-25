@@ -203,9 +203,8 @@ impl<K: ColumnType> Block<K> {
         &self.columns
     }
 
-    fn append_column(&mut self, column: Column<K>) {
+    pub fn append_column(&mut self, column: Column<K>) {
         let column_len = column.len();
-
         if !self.columns.is_empty() && self.row_count() != column_len {
             panic!("all columns in block must have same size.")
         }

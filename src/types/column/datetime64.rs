@@ -35,7 +35,7 @@ impl DateTime64ColumnData {
         })
     }
 
-    pub(crate) fn with_capacity(capacity: usize, precision: u32, timezone: Tz) -> Self {
+    pub fn with_capacity(capacity: usize, precision: u32, timezone: Tz) -> Self {
         DateTime64ColumnData {
             data: List::with_capacity(capacity),
             params: (precision, timezone),

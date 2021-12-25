@@ -11,7 +11,7 @@ use crate::{
 
 use super::column_data::ColumnData;
 
-pub(crate) struct FixedStringColumnData {
+pub struct FixedStringColumnData {
     buffer: Vec<u8>,
     str_len: usize,
 }
@@ -32,6 +32,11 @@ impl FixedStringColumnData {
             buffer: Vec::with_capacity(capacity * str_len),
             str_len,
         }
+    }
+
+    pub fn push_bytes(&mut self, bytes: &[u8]) {
+        let l = cmp::min(bytes.len(), self.str_len);
+        self.buffer.extend_from_slice(&bytes[0..l]);
     }
 
     pub(crate) fn load<T: ReadEx>(reader: &mut T, size: usize, str_len: usize) -> Result<Self> {
@@ -65,9 +70,7 @@ impl ColumnData for FixedStringColumnData {
     fn push(&mut self, value: Value) {
         let bs: String = String::from(value);
         let l = cmp::min(bs.len(), self.str_len);
-        let old_len = self.buffer.len();
         self.buffer.extend_from_slice(&bs.as_bytes()[0..l]);
-        self.buffer.resize(old_len + (self.str_len - l), 0_u8);
     }
 
     fn at(&self, index: usize) -> ValueRef {

@@ -23,7 +23,7 @@ pub struct ChronoDateTimeColumnData {
 }
 
 impl ChronoDateTimeColumnData {
-    pub(crate) fn with_capacity(capacity: usize, tz: Tz) -> ChronoDateTimeColumnData {
+    pub fn with_capacity(capacity: usize, tz: Tz) -> ChronoDateTimeColumnData {
         let data = Vec::with_capacity(capacity);
         ChronoDateTimeColumnData { data, tz }
     }
