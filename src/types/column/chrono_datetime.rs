@@ -27,6 +27,10 @@ impl ChronoDateTimeColumnData {
         let data = Vec::with_capacity(capacity);
         ChronoDateTimeColumnData { data, tz }
     }
+
+    pub fn push(&mut self, value: DateTime<Tz>) {
+        self.data.push(value);
+    }
 }
 
 pub(crate) struct ChronoDateTimeAdapter {
